@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 09, 2025 at 09:41 AM
+-- Generation Time: Aug 24, 2025 at 08:53 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -161,7 +161,8 @@ CREATE TABLE `produk` (
 
 INSERT INTO `produk` (`id_produk`, `id_user`, `id_tutor`, `id_kategori`, `image_course`, `title`, `description`, `price`) VALUES
 (1, 1, 2, 1, 'https://plus.unsplash.com/premium_photo-1682787494977-d013bb5a8773?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 'Membangun aplikasi pemesanan mobil menggunakan Next.js', 'Aplikasi pemesanan mobil berbasis web yang dibangun dengan Next.js untuk memudahkan pengguna dalam mencari, memilih, dan memesan mobil secara online.', 577.12),
-(2, 2, 1, 2, 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 'Belajar Digital Marketing', 'Belajar melakukan pemasaran produk secara online demi visi meningkatkan kejayaan sound horeg di level dewa', 999.99);
+(2, 2, 1, 2, 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 'Belajar Digital Marketing', 'Belajar melakukan pemasaran produk secara online', 279.49),
+(5, 2, 1, 2, 'https://contoh.image/course.png', 'Belajar Node.js dengan Bangga', 'Kursus lengkap belajar backend dengan Node.js, kembangkan kemampuan tingkatkan kerapian kode', 777.89);
 
 -- --------------------------------------------------------
 
@@ -203,7 +204,7 @@ CREATE TABLE `tutor` (
 
 INSERT INTO `tutor` (`id_tutor`, `avatar`, `name_tutor`, `role_tutor`) VALUES
 (1, 'https://images.unsplash.com/photo-1566285270364-2776f5eed5e9?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 'Prabu Siliwangi', 'UI/UX'),
-(2, 'https://plus.unsplash.com/premium_photo-1663050728129-cb8d64cfadf9?q=80&w=688&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 'Raden Patah Tersirat', 'Backend Developer');
+(2, 'https://plus.unsplash.com/premium_photo-1663050728129-cb8d64cfadf9?q=80&w=688&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 'Raden Patah Tersirat', 'Profesional Backend Developer');
 
 -- --------------------------------------------------------
 
@@ -213,20 +214,28 @@ INSERT INTO `tutor` (`id_tutor`, `avatar`, `name_tutor`, `role_tutor`) VALUES
 
 CREATE TABLE `users` (
   `id_user` int(11) NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
+  `fullname` varchar(255) DEFAULT NULL,
+  `username` varchar(100) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `gender` enum('pria','wanita','other') DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
-  `password` varchar(50) DEFAULT NULL
+  `password` varchar(255) DEFAULT NULL,
+  `verification_token` varchar(255) DEFAULT NULL,
+  `is_verified` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id_user`, `name`, `email`, `gender`, `phone`, `password`) VALUES
-(1, 'Dwiki Maulana Suharto', 'dwiki@gmail.com', 'pria', '6289787657234', '12345'),
-(2, 'thomas edi sound', 'edisound@gmail.com', 'pria', '6298860388765', '54321');
+INSERT INTO `users` (`id_user`, `fullname`, `username`, `email`, `gender`, `phone`, `password`, `verification_token`, `is_verified`) VALUES
+(1, 'Dwiki Maulana Suharto', 'dwiki123', 'dwiki@gmail.com', 'pria', '6289787657234', '12345', NULL, 0),
+(2, 'thomas edi sound horeg', 'edisound2', 'edisound@gmail.com', 'pria', '6298860388765', '54321', NULL, 0),
+(3, 'Jayabaya', 'jayabaya3', 'jayabaya@gmail.com', 'pria', '64670399965', '567891', NULL, 0),
+(7, 'Sakura  Edelwes', 'sakura33', 'sakura33@email.com', 'wanita', '6281234567890', '$2b$10$R2NUdyTljPdkBO.DYaWil.KmD1BYaQSmcHekFW/0DCVYei8kyvyQC', NULL, 0),
+(11, 'Zilong Thefire', 'zilongxx2', 'zilongfast@email.com', 'pria', '08123456789', '$2b$10$MNgZ.LHnYAoGWY4zhUPNQOnAh0Zw9.TvupU.kTGkl0sxCa4l4Q8mC', NULL, 1),
+(12, 'Dragon Fly', 'DragonFF', 'flydragon@email.com', 'pria', '08123411189', '$2b$10$VC/UjvjkCkZM8eMMLAOgteQcO7n8JsYUF/ErEpZ6oPoh8qKE4ujSG', NULL, 1),
+(13, 'Afrisa Dimana', 'Afrisa77', 'afrisa@email.com', 'wanita', '08123911189', '$2b$10$CmVNBFhVWLI.qii/ZktOmeThsiAFs1pNJv6DaK71xB/HUXvr3vabK', NULL, 1);
 
 --
 -- Indexes for dumped tables
@@ -316,7 +325,8 @@ ALTER TABLE `tutor`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id_user`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -374,7 +384,7 @@ ALTER TABLE `pretest`
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `review`
@@ -392,7 +402,7 @@ ALTER TABLE `tutor`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables

@@ -1,20 +1,20 @@
 const db = require('../config/db');
 
 async function getAllUsers() {
-  const [rows] = await db.query('SELECT * FROM users');
+  const [rows] = await db.query('SELECT id_user, fullname, username, email, gender, phone, is_verified FROM users');
   return rows;
 }
 
 async function getUserById(id) {
-  const [rows] = await db.query('SELECT * FROM users WHERE id_user = ?', [id]);
+  const [rows] = await db.query('SELECT id_user, fullname, username, email, gender, phone, is_verified FROM users WHERE id_user = ?', [id]);
   return rows[0];
 }
 
 async function createUser(data) {
-  const { name, email, gender, phone, password } = data;
+  const { fullname, username, email, gender, phone, password } = data;
   const [result] = await db.query(
-    `INSERT INTO users (name, email, gender, phone, password) VALUES (?, ?, ?, ?, ?)`,
-    [name, email, gender, phone, password]
+    `INSERT INTO users (fullname, username, email, gender, phone, password) VALUES (?, ?, ?, ?, ?, ?)`,
+    [fullname, username, email, gender, phone, password]
   );
   return result.insertId;
 }

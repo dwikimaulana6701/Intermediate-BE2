@@ -1,7 +1,7 @@
 const productModel = require('../models/product.model');
 
-async function getAllProducts() {
-  return await productModel.getAllProduct();
+async function getAllProducts(queryParams) {
+  return await productModel.getAllProduct(queryParams);
 }
 
 async function getProductById(id) {
